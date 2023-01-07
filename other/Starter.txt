@@ -1,0 +1,13 @@
+keyword			|| class,public,static,main,int,float,bool,void,char,if,else,for,while,switch,case
+integer			||
+float			|| 
+boolean			|| true false
+punctuation		|| "{" "}" "[" "]" "(" ")"
+string			|| "..."
+character		|| '..'
+operator		|| "+" "-" "*" "<" ">" "!" "/" "|" ","
+identifier		||
+				||
+				||
+==========================================================
+int // float // bool //char
