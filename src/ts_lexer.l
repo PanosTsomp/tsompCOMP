@@ -1,5 +1,6 @@
 %{
-#include "ts_parser.tab.h"  // Include Bison-generated header with YYSTYPE and yylval definitions
+#include "ts_parser.h"  // This is a Bison generated header (YYSTYPE, yylval)
+int line_number = 1;       
 %}
 
 
@@ -33,10 +34,23 @@
 ":"                     { return COLON; }
 
 [0-9]+                  { yylval.num = atoi(yytext); return NUMBER; }
-[a-zA-Z][a-zA-Z0-9]*    { yylval.str = strdup(yytext); return IDENTIFIER; }
+[a-zA-Z_][a-zA-Z0-9_]*  { yylval.str = strdup(yytext); return IDENTIFIER; }
 
+"//"                    { /* skip single-line comment */
+                          while(*yytext != '\n' && *yytext != '\0') yylex();
+                        }
+"/*"                     { /* skip multi-line comment */
+                          char c, prev = 0;
+                          while((c = input()) != 0) {
+                            if(c == '/' && prev == '*') break;
+                            prev = c;
+                          }
+                        }
 
-[\t\r\n]+               { /* skip whitespace */ }
-.                       { printf("Unexpected character: %s\n", yytext); exit(1); } // Add error handling
+[\t\r]+                 { /* skip horizontal whitespace */ }
+\n                      { /* increment line number on new lines */
+                          line_number++; 
+                        }
+.                       { printf("Unexpected character: %s on line %d\n", yytext, line_number);}
 
 %%
