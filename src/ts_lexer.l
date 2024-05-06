@@ -1,6 +1,7 @@
 %{
 #include "ts_parser.h"  // This is a Bison generated header (YYSTYPE, yylval)
-int line_number = 1;       
+int line_number = 1;  
+  
 %}
 
 

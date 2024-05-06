@@ -74,9 +74,9 @@
 
 extern int yylex(void);
 void yyerror(char *s) {
-    fprintf(stderr, "Error at line %d: %s\n", yylineno, s);
+    fprintf(stderr, "Error : %s\n", s);
 }
-
+ 
 ASTNode* root;  // Root of the AST
 
 #line 83 "src/ts_parser.c"

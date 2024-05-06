@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-
+ 
 typedef enum {
     NodeType_Number,
     NodeType_Variable,
