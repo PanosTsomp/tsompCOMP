@@ -1,6 +1,6 @@
-#line 2 "src/ts_lexer.c"
+#line 2 "build/ts_lexer.c"
 
-#line 4 "src/ts_lexer.c"
+#line 4 "build/ts_lexer.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -482,8 +482,8 @@ char *yytext;
 #include "ts_parser.h"  // This is a Bison generated header (YYSTYPE, yylval)
 int line_number = 1;  
   
-#line 486 "src/ts_lexer.c"
-#line 487 "src/ts_lexer.c"
+#line 486 "build/ts_lexer.c"
+#line 487 "build/ts_lexer.c"
 
 #define INITIAL 0
 
@@ -703,7 +703,7 @@ YY_DECL
 #line 8 "src/ts_lexer.l"
 
 
-#line 707 "src/ts_lexer.c"
+#line 707 "build/ts_lexer.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -926,7 +926,7 @@ YY_RULE_SETUP
 #line 57 "src/ts_lexer.l"
 ECHO;
 	YY_BREAK
-#line 930 "src/ts_lexer.c"
+#line 930 "build/ts_lexer.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

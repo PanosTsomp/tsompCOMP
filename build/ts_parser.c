@@ -70,16 +70,149 @@
 #line 1 "src/ts_parser.y"
 
 #include <stdio.h>
-#include "ast.h"
+#include <stdlib.h>
+#include <string.h>
+
+typedef enum {
+    NodeType_Number,
+    NodeType_Variable,
+    NodeType_Operation,
+    NodeType_Assignment,
+    NodeType_If,
+    NodeType_While,
+    NodeType_Switch,
+    NodeType_Case,
+    NodeType_Default
+} NodeType;
+
+typedef struct ASTNode {
+    NodeType type;
+    union {
+        int num;  // For number literals
+        char* str;  // For variables, ensure to free this memory
+        struct {
+            struct ASTNode* left;
+            struct ASTNode* right;
+            int op;  // Operation type (PLUS, MINUS, etc.)
+        } op;
+        struct {
+            struct ASTNode* left;
+            struct ASTNode* right;
+        } assign;
+        struct {
+            struct ASTNode* condition;
+            struct ASTNode* true_branch;
+            struct ASTNode* false_branch;
+        } if_stmt;
+        struct {
+            struct ASTNode* condition;
+            struct ASTNode* body;
+        } while_loop;
+        struct {
+            struct ASTNode* var;
+            struct ASTNode* cases;  // List of case nodes
+        } switch_stmt;
+        struct {
+            int value;
+            struct ASTNode* body;
+            struct ASTNode* next_case;
+        } case_stmt;
+        struct {
+            struct ASTNode* body;
+        } default_stmt;
+    };
+} ASTNode;
+
+// Function prototypes for creating different types of AST nodes
+ASTNode* new_number_node(int num) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_Number;
+    node->num = num;
+    return node;
+}
+
+ASTNode* new_variable_node(char* str) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_Variable;
+    node->str = strdup(str);
+    return node;
+}
+
+ASTNode* new_operation_node(ASTNode* left, ASTNode* right, int op) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_Operation;
+    node->op.left = left;
+    node->op.right = right;
+    node->op.op = op;
+    return node;
+}
+
+ASTNode* new_assignment_node(ASTNode* left, ASTNode* right) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_Assignment;
+    node->assign.left = left;
+    node->assign.right = right;
+    return node;
+}
+
+ASTNode* new_if_node(ASTNode* condition, ASTNode* true_branch, ASTNode* false_branch) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_If;
+    node->if_stmt.condition = condition;
+    node->if_stmt.true_branch = true_branch;
+    node->if_stmt.false_branch = false_branch;
+    return node;
+}
+
+ASTNode* new_while_node(ASTNode* condition, ASTNode* body) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_While;
+    node->while_loop.condition = condition;
+    node->while_loop.body = body;
+    return node;
+}
+
+ASTNode* new_switch_node(ASTNode* var, ASTNode* cases) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_Switch;
+    node->switch_stmt.var = var;
+    node->switch_stmt.cases = cases;
+    return node;
+}
+
+ASTNode* new_case_node(int value, ASTNode* body, ASTNode* next_case) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_Case;
+    node->case_stmt.value = value;
+    node->case_stmt.body = body;
+    node->case_stmt.next_case = next_case;
+    return node;
+}
+
+ASTNode* new_default_node(ASTNode* body) {
+    ASTNode* node = malloc(sizeof(ASTNode));
+    if (node == NULL) return NULL;
+    node->type = NodeType_Default;
+    node->default_stmt.body = body;
+    return node;
+}
 
 extern int yylex(void);
 void yyerror(char *s) {
     fprintf(stderr, "Error : %s\n", s);
 }
- 
+
 ASTNode* root;  // Root of the AST
 
-#line 83 "src/ts_parser.c"
+#line 216 "build/ts_parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -529,11 +662,11 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,    28,    28,    30,    34,    38,    39,    43,    47,    48,
-      52,    56,    60,    64,    68,    72,    76,    80,    84,    88,
-      95,   102,   110,   114,   118,   122,   129,   133,   137
+       0,   160,   160,   162,   166,   170,   171,   175,   179,   180,
+     184,   188,   192,   196,   200,   204,   208,   212,   216,   220,
+     227,   234,   242,   246,   250,   254,   261,   265,   269
 };
 #endif
 
@@ -1146,184 +1279,184 @@ yyreduce:
   switch (yyn)
     {
   case 4: /* statement: expression SEMICOLON  */
-#line 35 "src/ts_parser.y"
+#line 167 "src/ts_parser.y"
       {
           printf("Evaluated Expression: %d\n", (yyvsp[-1].node)->num);  // Adjust to how you wish to handle expressions
       }
-#line 1154 "src/ts_parser.c"
+#line 1287 "build/ts_parser.c"
     break;
 
   case 7: /* expression: NUMBER  */
-#line 44 "src/ts_parser.y"
+#line 176 "src/ts_parser.y"
       {
           (yyval.node) = new_number_node((yyvsp[0].num));
       }
-#line 1162 "src/ts_parser.c"
+#line 1295 "build/ts_parser.c"
     break;
 
   case 9: /* expression: expression PLUS expression  */
-#line 49 "src/ts_parser.y"
+#line 181 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), PLUS);
       }
-#line 1170 "src/ts_parser.c"
+#line 1303 "build/ts_parser.c"
     break;
 
   case 10: /* expression: expression MINUS expression  */
-#line 53 "src/ts_parser.y"
+#line 185 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), MINUS);
       }
-#line 1178 "src/ts_parser.c"
+#line 1311 "build/ts_parser.c"
     break;
 
   case 11: /* expression: expression MULT expression  */
-#line 57 "src/ts_parser.y"
+#line 189 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), MULT);
       }
-#line 1186 "src/ts_parser.c"
+#line 1319 "build/ts_parser.c"
     break;
 
   case 12: /* expression: expression DIV expression  */
-#line 61 "src/ts_parser.y"
+#line 193 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), DIV);
       }
-#line 1194 "src/ts_parser.c"
+#line 1327 "build/ts_parser.c"
     break;
 
   case 13: /* expression: LPAREN expression RPAREN  */
-#line 65 "src/ts_parser.y"
+#line 197 "src/ts_parser.y"
       {
           (yyval.node) = (yyvsp[-1].node);  // Simply pass up the inner expression node
       }
-#line 1202 "src/ts_parser.c"
+#line 1335 "build/ts_parser.c"
     break;
 
   case 14: /* expression: expression EQ expression  */
-#line 69 "src/ts_parser.y"
+#line 201 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), EQ);
       }
-#line 1210 "src/ts_parser.c"
+#line 1343 "build/ts_parser.c"
     break;
 
   case 15: /* expression: expression NEQ expression  */
-#line 73 "src/ts_parser.y"
+#line 205 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), NEQ);
       }
-#line 1218 "src/ts_parser.c"
+#line 1351 "build/ts_parser.c"
     break;
 
   case 16: /* expression: expression LT expression  */
-#line 77 "src/ts_parser.y"
+#line 209 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), LT);
       }
-#line 1226 "src/ts_parser.c"
+#line 1359 "build/ts_parser.c"
     break;
 
   case 17: /* expression: expression GT expression  */
-#line 81 "src/ts_parser.y"
+#line 213 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), GT);
       }
-#line 1234 "src/ts_parser.c"
+#line 1367 "build/ts_parser.c"
     break;
 
   case 18: /* expression: expression LE expression  */
-#line 85 "src/ts_parser.y"
+#line 217 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), LE);
       }
-#line 1242 "src/ts_parser.c"
+#line 1375 "build/ts_parser.c"
     break;
 
   case 19: /* expression: expression GE expression  */
-#line 89 "src/ts_parser.y"
+#line 221 "src/ts_parser.y"
       {
           (yyval.node) = new_operation_node((yyvsp[-2].node), (yyvsp[0].node), GE);
       }
-#line 1250 "src/ts_parser.c"
+#line 1383 "build/ts_parser.c"
     break;
 
   case 20: /* variable: IDENTIFIER  */
-#line 96 "src/ts_parser.y"
+#line 228 "src/ts_parser.y"
       {
           (yyval.node) = new_variable_node((yyvsp[0].str));
       }
-#line 1258 "src/ts_parser.c"
+#line 1391 "build/ts_parser.c"
     break;
 
   case 21: /* assignment_statement: variable ASSIGN expression SEMICOLON  */
-#line 103 "src/ts_parser.y"
+#line 235 "src/ts_parser.y"
       {
           (yyval.node) = new_assignment_node((yyvsp[-3].node), (yyvsp[-1].node));
           printf("Assignment Node Created\n");
       }
-#line 1267 "src/ts_parser.c"
+#line 1400 "build/ts_parser.c"
     break;
 
   case 22: /* control_structure: IF LPAREN expression RPAREN statement  */
-#line 111 "src/ts_parser.y"
+#line 243 "src/ts_parser.y"
       {
           (yyval.node) = new_if_node((yyvsp[-2].node), (yyvsp[0].node), NULL);
       }
-#line 1275 "src/ts_parser.c"
+#line 1408 "build/ts_parser.c"
     break;
 
   case 23: /* control_structure: IF LPAREN expression RPAREN statement ELSE statement  */
-#line 115 "src/ts_parser.y"
+#line 247 "src/ts_parser.y"
       {
           (yyval.node) = new_if_node((yyvsp[-4].node), (yyvsp[-2].node), (yyvsp[0].node));
       }
-#line 1283 "src/ts_parser.c"
+#line 1416 "build/ts_parser.c"
     break;
 
   case 24: /* control_structure: WHILE LPAREN expression RPAREN statement  */
-#line 119 "src/ts_parser.y"
+#line 251 "src/ts_parser.y"
       {
           (yyval.node) = new_while_node((yyvsp[-2].node), (yyvsp[0].node));
       }
-#line 1291 "src/ts_parser.c"
+#line 1424 "build/ts_parser.c"
     break;
 
   case 25: /* control_structure: SWITCH LPAREN variable RPAREN LBRACE case_statements RBRACE  */
-#line 123 "src/ts_parser.y"
+#line 255 "src/ts_parser.y"
       {
           (yyval.node) = new_switch_node((yyvsp[-4].node), (yyvsp[-1].node));
       }
-#line 1299 "src/ts_parser.c"
+#line 1432 "build/ts_parser.c"
     break;
 
   case 26: /* case_statements: CASE NUMBER COLON statement  */
-#line 130 "src/ts_parser.y"
+#line 262 "src/ts_parser.y"
       {
           (yyval.node) = new_case_node((yyvsp[-2].num), (yyvsp[0].node), NULL);
       }
-#line 1307 "src/ts_parser.c"
+#line 1440 "build/ts_parser.c"
     break;
 
   case 27: /* case_statements: case_statements CASE NUMBER COLON statement  */
-#line 134 "src/ts_parser.y"
+#line 266 "src/ts_parser.y"
       {
           (yyval.node) = new_case_node((yyvsp[-2].num), (yyvsp[0].node), (yyvsp[-4].node));
       }
-#line 1315 "src/ts_parser.c"
+#line 1448 "build/ts_parser.c"
     break;
 
   case 28: /* case_statements: DEFAULT COLON statement  */
-#line 138 "src/ts_parser.y"
+#line 270 "src/ts_parser.y"
       {
           (yyval.node) = new_default_node((yyvsp[0].node));
       }
-#line 1323 "src/ts_parser.c"
+#line 1456 "build/ts_parser.c"
     break;
 
 
-#line 1327 "src/ts_parser.c"
+#line 1460 "build/ts_parser.c"
 
       default: break;
     }
@@ -1516,7 +1649,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 143 "src/ts_parser.y"
+#line 275 "src/ts_parser.y"
 
 
 int main(void) {
@@ -1528,3 +1661,4 @@ int main(void) {
     }
     return 0;
 }
+
