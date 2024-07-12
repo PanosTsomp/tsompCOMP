@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_BUILD_TS_PARSER_H_INCLUDED
-# define YY_YY_BUILD_TS_PARSER_H_INCLUDED
+#ifndef YY_YY_BUILD_PARSER_HPP_INCLUDED
+# define YY_YY_BUILD_PARSER_HPP_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -55,30 +55,25 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     NUMBER = 258,                  /* NUMBER  */
-    IDENTIFIER = 259,              /* IDENTIFIER  */
-    PLUS = 260,                    /* PLUS  */
-    MINUS = 261,                   /* MINUS  */
-    MULT = 262,                    /* MULT  */
-    DIV = 263,                     /* DIV  */
-    ASSIGN = 264,                  /* ASSIGN  */
-    EQ = 265,                      /* EQ  */
-    NEQ = 266,                     /* NEQ  */
-    LT = 267,                      /* LT  */
-    GT = 268,                      /* GT  */
-    LE = 269,                      /* LE  */
-    GE = 270,                      /* GE  */
-    LPAREN = 271,                  /* LPAREN  */
-    RPAREN = 272,                  /* RPAREN  */
-    LBRACE = 273,                  /* LBRACE  */
-    RBRACE = 274,                  /* RBRACE  */
-    SEMICOLON = 275,               /* SEMICOLON  */
-    IF = 276,                      /* IF  */
-    ELSE = 277,                    /* ELSE  */
-    WHILE = 278,                   /* WHILE  */
-    SWITCH = 279,                  /* SWITCH  */
-    CASE = 280,                    /* CASE  */
-    DEFAULT = 281,                 /* DEFAULT  */
-    COLON = 282                    /* COLON  */
+    FLOATNUMBER = 259,             /* FLOATNUMBER  */
+    IDENTIFIER = 260,              /* IDENTIFIER  */
+    INT = 261,                     /* INT  */
+    FLOAT = 262,                   /* FLOAT  */
+    BOOL = 263,                    /* BOOL  */
+    VOID = 264,                    /* VOID  */
+    IF = 265,                      /* IF  */
+    ELSE = 266,                    /* ELSE  */
+    WHILE = 267,                   /* WHILE  */
+    FOR = 268,                     /* FOR  */
+    RETURN = 269,                  /* RETURN  */
+    PRINT = 270,                   /* PRINT  */
+    EQ = 271,                      /* EQ  */
+    NEQ = 272,                     /* NEQ  */
+    LE = 273,                      /* LE  */
+    GE = 274,                      /* GE  */
+    AND = 275,                     /* AND  */
+    OR = 276,                      /* OR  */
+    LOWER_THAN_ELSE = 277          /* LOWER_THAN_ELSE  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -87,13 +82,16 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 146 "src/ts_parser.y"
+#line 18 "src/parser.y"
 
-    int num;        // For integer literals
-    char* str;      // For strings
-    ASTNode* node;  // For AST nodes
+    int num;
+    float fnum;
+    char* id;
+    const char* type_name; // Changed to const char*
+    tsompcc::ASTNode* node;
+    std::vector<tsompcc::ASTNodePtr>* node_list;
 
-#line 97 "build/ts_parser.h"
+#line 95 "build/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -108,4 +106,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_BUILD_TS_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_BUILD_PARSER_HPP_INCLUDED  */
