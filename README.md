@@ -1,5 +1,4 @@
-https://www.youtube.com/watch?v=Lvc8qx8ukOI&t=525s
-\
+
 tsompCC-compiler/
 ├── docs/
 ├── include/
