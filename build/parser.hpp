@@ -90,8 +90,9 @@ union YYSTYPE
     const char* type_name; // Changed to const char*
     tsompcc::ASTNode* node;
     std::vector<tsompcc::ASTNodePtr>* node_list;
+    std::vector<std::string>* str_list; // Add this for param_list
 
-#line 95 "build/parser.hpp"
+#line 96 "build/parser.hpp"
 
 };
 typedef union YYSTYPE YYSTYPE;

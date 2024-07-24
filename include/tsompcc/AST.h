@@ -56,6 +56,8 @@ class BlockNode : public ASTNode {
 public:
     BlockNode(std::vector<ASTNodePtr> &&stmts) : statements(std::move(stmts)) {}
     llvm::Value* codegen() override;
+    
+    size_t size() const { return statements.size(); } // Added size method
 };
 
 class VarDeclNode : public ASTNode {

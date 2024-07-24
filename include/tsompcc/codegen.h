@@ -5,6 +5,8 @@
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 #include "tsompcc/AST.h"
+#include <unordered_map>
+#include <string>
 
 namespace tsompcc {
 
@@ -13,6 +15,7 @@ public:
     llvm::LLVMContext Context;
     llvm::IRBuilder<> Builder;
     std::unique_ptr<llvm::Module> Module;
+    static std::unordered_map<std::string, llvm::AllocaInst*> symbols;
 
     CodeGenContext() : Builder(Context), Module(std::make_unique<llvm::Module>("my_module", Context)) {}
     llvm::Module* getModule() { return Module.get(); }

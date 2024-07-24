@@ -4,51 +4,52 @@
 #include "tsompcc/lexer.h"
 
 #define YY_DECL int yylex()
+
 %}
 
 %%
-"int"           { return INT; }
-"float"         { return FLOAT; }
-"bool"          { return BOOL; }
-"void"          { return VOID; }
-"if"            { return IF; }
-"else"          { return ELSE; }
-"while"         { return WHILE; }
-"for"           { return FOR; }
-"return"        { return RETURN; }
-"print"         { return PRINT; }
+"int"           { std::cout << "Token: int" << std::endl; return INT; }
+"float"         { std::cout << "Token: float" << std::endl; return FLOAT; }
+"bool"          { std::cout << "Token: bool" << std::endl; return BOOL; }
+"void"          { std::cout << "Token: void" << std::endl; return VOID; }
+"if"            { std::cout << "Token: if" << std::endl; return IF; }
+"else"          { std::cout << "Token: else" << std::endl; return ELSE; }
+"while"         { std::cout << "Token: while" << std::endl; return WHILE; }
+"for"           { std::cout << "Token: for" << std::endl; return FOR; }
+"return"        { std::cout << "Token: return" << std::endl; return RETURN; }
+"print"         { std::cout << "Token: print" << std::endl; return PRINT; }
 
-[0-9]+          { yylval.num = atoi(yytext); return NUMBER; }
-[0-9]+"."[0-9]* { yylval.fnum = atof(yytext); return FLOATNUMBER; }
-[a-zA-Z_][a-zA-Z0-9_]* { yylval.id = strdup(yytext); return IDENTIFIER; }
+[0-9]+          { std::cout << "Token: number" << std::endl; yylval.num = atoi(yytext); return NUMBER; }
+[0-9]+"."[0-9]* { std::cout << "Token: float number" << std::endl; yylval.fnum = atof(yytext); return FLOATNUMBER; }
+[a-zA-Z_][a-zA-Z0-9_]* { std::cout << "Token: identifier" << std::endl; yylval.id = strdup(yytext); return IDENTIFIER; }
 
-"=="            { return EQ; }
-"!="            { return NEQ; }
-"<="            { return LE; }
-">="            { return GE; }
-"&&"            { return AND; }
-"||"            { return OR; }
+"=="            { std::cout << "Token: ==" << std::endl; return EQ; }
+"!="            { std::cout << "Token: !=" << std::endl; return NEQ; }
+"<="            { std::cout << "Token: <=" << std::endl; return LE; }
+">="            { std::cout << "Token: >=" << std::endl; return GE; }
+"&&"            { std::cout << "Token: &&" << std::endl; return AND; }
+"||"            { std::cout << "Token: ||" << std::endl; return OR; }
 
-"+"             { return '+'; }
-"-"             { return '-'; }
-"*"             { return '*'; }
-"/"             { return '/'; }
-"="             { return '='; }
-"<"             { return '<'; }
-">"             { return '>'; }
-"!"             { return '!'; }
+"+"             { std::cout << "Token: +" << std::endl; return '+'; }
+"-"             { std::cout << "Token: -" << std::endl; return '-'; }
+"*"             { std::cout << "Token: *" << std::endl; return '*'; }
+"/"             { std::cout << "Token: /" << std::endl; return '/'; }
+"="             { std::cout << "Token: =" << std::endl; return '='; }
+"<"             { std::cout << "Token: <" << std::endl; return '<'; }
+">"             { std::cout << "Token: >" << std::endl; return '>'; }
+"!"             { std::cout << "Token: !" << std::endl; return '!'; }
 
-"("             { return '('; }
-")"             { return ')'; }
-"{"             { return '{'; }
-"}"             { return '}'; }
-";"             { return ';'; }
-","             { return ','; }
+"("             { std::cout << "Token: (" << std::endl; return '('; }
+")"             { std::cout << "Token: )" << std::endl; return ')'; }
+"{"             { std::cout << "Token: {" << std::endl; return '{'; }
+"}"             { std::cout << "Token: }" << std::endl; return '}'; }
+";"             { std::cout << "Token: ;" << std::endl; return ';'; }
+","             { std::cout << "Token: ," << std::endl; return ','; }
 
 [ \t\n]+        { /* Ignore whitespace */ }
 "//".*          { /* Ignore comments */ }
 
-.               { return yytext[0]; }
+.               { std::cout << "Token: " << yytext << std::endl; return yytext[0]; }
 
 %%
 

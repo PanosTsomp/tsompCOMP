@@ -82,7 +82,7 @@ extern int yylex();
 extern int yyparse();
 extern FILE *yyin;
 void yyerror(const char *s);
-std::unique_ptr<tsompcc::ASTNode> root; // Declaration of root
+std::unique_ptr<tsompcc::ASTNode> root;
 
 #line 88 "build/parser.cpp"
 
@@ -145,24 +145,26 @@ enum yysymbol_kind_t
   YYSYMBOL_30_ = 30,                       /* '='  */
   YYSYMBOL_31_ = 31,                       /* '('  */
   YYSYMBOL_32_ = 32,                       /* ')'  */
-  YYSYMBOL_33_ = 33,                       /* '{'  */
-  YYSYMBOL_34_ = 34,                       /* '}'  */
-  YYSYMBOL_YYACCEPT = 35,                  /* $accept  */
-  YYSYMBOL_program = 36,                   /* program  */
-  YYSYMBOL_stmt_list = 37,                 /* stmt_list  */
-  YYSYMBOL_stmt = 38,                      /* stmt  */
-  YYSYMBOL_simple_stmt = 39,               /* simple_stmt  */
-  YYSYMBOL_compound_stmt = 40,             /* compound_stmt  */
-  YYSYMBOL_var_decl = 41,                  /* var_decl  */
-  YYSYMBOL_func_decl = 42,                 /* func_decl  */
-  YYSYMBOL_type = 43,                      /* type  */
-  YYSYMBOL_block = 44,                     /* block  */
-  YYSYMBOL_if_stmt = 45,                   /* if_stmt  */
-  YYSYMBOL_while_stmt = 46,                /* while_stmt  */
-  YYSYMBOL_for_stmt = 47,                  /* for_stmt  */
-  YYSYMBOL_return_stmt = 48,               /* return_stmt  */
-  YYSYMBOL_print_stmt = 49,                /* print_stmt  */
-  YYSYMBOL_expr = 50                       /* expr  */
+  YYSYMBOL_33_ = 33,                       /* ','  */
+  YYSYMBOL_34_ = 34,                       /* '{'  */
+  YYSYMBOL_35_ = 35,                       /* '}'  */
+  YYSYMBOL_YYACCEPT = 36,                  /* $accept  */
+  YYSYMBOL_program = 37,                   /* program  */
+  YYSYMBOL_stmt_list = 38,                 /* stmt_list  */
+  YYSYMBOL_stmt = 39,                      /* stmt  */
+  YYSYMBOL_simple_stmt = 40,               /* simple_stmt  */
+  YYSYMBOL_compound_stmt = 41,             /* compound_stmt  */
+  YYSYMBOL_var_decl = 42,                  /* var_decl  */
+  YYSYMBOL_func_decl = 43,                 /* func_decl  */
+  YYSYMBOL_param_list = 44,                /* param_list  */
+  YYSYMBOL_type = 45,                      /* type  */
+  YYSYMBOL_block = 46,                     /* block  */
+  YYSYMBOL_if_stmt = 47,                   /* if_stmt  */
+  YYSYMBOL_while_stmt = 48,                /* while_stmt  */
+  YYSYMBOL_for_stmt = 49,                  /* for_stmt  */
+  YYSYMBOL_return_stmt = 50,               /* return_stmt  */
+  YYSYMBOL_print_stmt = 51,                /* print_stmt  */
+  YYSYMBOL_expr = 52                       /* expr  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -490,16 +492,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  3
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   255
+#define YYLAST   264
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  35
+#define YYNTOKENS  36
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  16
+#define YYNNTS  17
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  43
+#define YYNRULES  46
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  90
+#define YYNSTATES  96
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   277
@@ -520,7 +522,7 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      31,    32,    25,    23,     2,    24,     2,    26,     2,     2,
+      31,    32,    25,    23,    33,    24,     2,    26,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,    29,
       27,    30,    28,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -528,7 +530,7 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    33,     2,    34,     2,     2,     2,     2,
+       2,     2,     2,    34,     2,    35,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -550,11 +552,11 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    49,    49,    56,    60,    66,    67,    71,    72,    73,
-      74,    75,    79,    80,    81,    85,    91,    97,    98,    99,
-     100,   104,   111,   114,   120,   126,   132,   138,   144,   147,
-     150,   153,   156,   159,   162,   165,   168,   171,   174,   177,
-     180,   183,   186,   189
+       0,    51,    51,    60,    65,    72,    73,    77,    78,    79,
+      80,    81,    85,    86,    87,    91,    98,   106,   111,   116,
+     123,   124,   125,   126,   130,   138,   142,   149,   156,   163,
+     170,   177,   181,   185,   189,   193,   197,   201,   205,   209,
+     213,   217,   221,   225,   229,   233,   237
 };
 #endif
 
@@ -574,10 +576,10 @@ static const char *const yytname[] =
   "FLOATNUMBER", "IDENTIFIER", "INT", "FLOAT", "BOOL", "VOID", "IF",
   "ELSE", "WHILE", "FOR", "RETURN", "PRINT", "EQ", "NEQ", "LE", "GE",
   "AND", "OR", "LOWER_THAN_ELSE", "'+'", "'-'", "'*'", "'/'", "'<'", "'>'",
-  "';'", "'='", "'('", "')'", "'{'", "'}'", "$accept", "program",
+  "';'", "'='", "'('", "')'", "','", "'{'", "'}'", "$accept", "program",
   "stmt_list", "stmt", "simple_stmt", "compound_stmt", "var_decl",
-  "func_decl", "type", "block", "if_stmt", "while_stmt", "for_stmt",
-  "return_stmt", "print_stmt", "expr", YY_NULLPTR
+  "func_decl", "param_list", "type", "block", "if_stmt", "while_stmt",
+  "for_stmt", "return_stmt", "print_stmt", "expr", YY_NULLPTR
 };
 
 static const char *
@@ -587,7 +589,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-33)
+#define YYPACT_NINF (-48)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -601,15 +603,16 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     -33,     1,    71,   -33,   -33,   -33,   -33,   -33,   -33,   -33,
-     -33,   -26,   -13,     8,     3,     9,     3,   -33,   -33,   -33,
-     -33,   -33,    50,   -33,   -33,   -33,   -33,   -33,   157,     3,
-       3,     3,   171,     3,    72,   -27,     3,     3,     3,     3,
-       3,     3,     3,     3,     3,     3,     3,     3,   -33,    89,
-     106,   185,   -33,   123,   -33,     3,    26,    15,    15,    15,
-      15,   -33,   -33,   227,   227,    -7,    -7,    15,    15,    71,
-      71,     3,    30,   199,    27,    51,   -33,   213,   -33,   -33,
-     -33,   -33,    71,     3,    39,   -33,   140,   -33,    71,   -33
+     -48,     1,    72,   -48,   -48,   -48,   -48,   -48,   -48,   -48,
+     -48,   -26,   -17,   -13,     3,     8,     3,   -48,   -48,   -48,
+     -48,   -48,    31,   -48,   -48,   -48,   -48,   -48,   166,     3,
+       3,     3,   180,     3,    81,   -27,     3,     3,     3,     3,
+       3,     3,     3,     3,     3,     3,     3,     3,   -48,    98,
+     115,   194,   -48,   132,   -48,     3,     4,     0,     0,     0,
+       0,   -48,   -48,   236,   236,    45,    45,     0,     0,    72,
+      72,     3,    11,   208,     5,    50,    47,   -48,   222,   -48,
+     -48,    16,     4,   -48,    72,     3,   -48,   -48,    51,   -48,
+     149,    39,   -48,    72,   -48,   -48
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -617,29 +620,30 @@ static const yytype_int16 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       4,     0,     2,     1,    41,    42,    40,    17,    18,    19,
-      20,     0,     0,     0,     0,     0,     0,     3,     5,     6,
+       4,     0,     2,     1,    44,    45,    43,    20,    21,    22,
+      23,     0,     0,     0,     0,     0,     0,     3,     5,     6,
        7,     8,     0,    12,    13,    14,    10,    11,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     9,     0,
-       0,     0,    26,     0,    43,     0,     0,    28,    29,    30,
-      31,    34,    35,    36,    37,    38,    39,    32,    33,     0,
-       0,     0,     0,     0,     0,    22,    24,     0,    27,    15,
-       4,    16,     0,     0,     0,    23,     0,    21,     0,    25
+       0,     0,    29,     0,    46,     0,    19,    31,    32,    33,
+      34,    37,    38,    39,    40,    41,    42,    35,    36,     0,
+       0,     0,     0,     0,     0,     0,    25,    27,     0,    30,
+      15,     0,     0,    18,     0,     0,     4,    16,     0,    26,
+       0,     0,    17,     0,    24,    28
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -33,   -33,   -19,   -32,   -33,   -33,   -33,   -33,   -33,   -33,
-     -33,   -33,   -33,   -33,   -33,   -14
+     -48,   -48,   -19,    -1,   -48,   -48,   -48,   -48,   -48,   -47,
+     -48,   -48,   -48,   -48,   -48,   -48,   -14
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     1,     2,    17,    18,    19,    20,    21,    22,    81,
-      23,    24,    25,    26,    27,    28
+       0,     1,     2,    17,    18,    19,    20,    21,    74,    22,
+      87,    23,    24,    25,    26,    27,    28
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -647,97 +651,100 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      32,     3,    34,    55,    56,    29,     4,     5,     6,    36,
-      37,    38,    39,    40,    41,    49,    50,    51,    30,    53,
-      46,    47,    57,    58,    59,    60,    61,    62,    63,    64,
-      65,    66,    67,    68,    16,    40,    41,    75,    76,    31,
-      33,    73,     4,     5,     6,     7,     8,     9,    10,    11,
-      85,    12,    13,    14,    15,    35,    89,    77,    74,    78,
-      80,    84,    82,     0,     0,     0,     0,     0,     0,    86,
-      16,     0,     0,    87,     4,     5,     6,     7,     8,     9,
-      10,    11,     0,    12,    13,    14,    15,     0,    36,    37,
+      32,     3,    34,    55,    56,    29,     4,     5,     6,    75,
+       7,     8,     9,    10,    30,    49,    50,    51,    31,    53,
+      40,    41,    57,    58,    59,    60,    61,    62,    63,    64,
+      65,    66,    67,    68,    16,    88,    35,    81,    82,    33,
+      79,    73,     4,     5,     6,     7,     8,     9,    10,    11,
+      86,    12,    13,    14,    15,    83,    92,    78,    84,     0,
+       0,    36,    37,    38,    39,    40,    41,    91,    76,    77,
+      16,    90,    46,    47,    94,     4,     5,     6,     7,     8,
+       9,    10,    11,    89,    12,    13,    14,    15,     0,     0,
+       0,     0,    95,     0,     0,     0,     0,    36,    37,    38,
+      39,    40,    41,    16,    42,    43,    44,    45,    46,    47,
+       0,     0,     0,    54,    36,    37,    38,    39,    40,    41,
+       0,    42,    43,    44,    45,    46,    47,     0,     0,     0,
+      69,    36,    37,    38,    39,    40,    41,     0,    42,    43,
+      44,    45,    46,    47,     0,     0,     0,    70,    36,    37,
       38,    39,    40,    41,     0,    42,    43,    44,    45,    46,
-      47,     0,    16,     0,    54,    36,    37,    38,    39,    40,
+      47,     0,     0,     0,    72,    36,    37,    38,    39,    40,
       41,     0,    42,    43,    44,    45,    46,    47,     0,     0,
-       0,    69,    36,    37,    38,    39,    40,    41,     0,    42,
-      43,    44,    45,    46,    47,     0,     0,     0,    70,    36,
-      37,    38,    39,    40,    41,     0,    42,    43,    44,    45,
-      46,    47,     0,     0,     0,    72,    36,    37,    38,    39,
-      40,    41,     0,    42,    43,    44,    45,    46,    47,     0,
-       0,     0,    88,    36,    37,    38,    39,    40,    41,     0,
-      42,    43,    44,    45,    46,    47,    48,    36,    37,    38,
-      39,    40,    41,     0,    42,    43,    44,    45,    46,    47,
-      52,    36,    37,    38,    39,    40,    41,     0,    42,    43,
-      44,    45,    46,    47,    71,    36,    37,    38,    39,    40,
-      41,     0,    42,    43,    44,    45,    46,    47,    79,    36,
-      37,    38,    39,    40,    41,     0,    42,    43,    44,    45,
-      46,    47,    83,    36,    37,    38,    39,    40,    41,     0,
-       0,     0,    44,    45,    46,    47
+       0,    93,    36,    37,    38,    39,    40,    41,     0,    42,
+      43,    44,    45,    46,    47,    48,    36,    37,    38,    39,
+      40,    41,     0,    42,    43,    44,    45,    46,    47,    52,
+      36,    37,    38,    39,    40,    41,     0,    42,    43,    44,
+      45,    46,    47,    71,    36,    37,    38,    39,    40,    41,
+       0,    42,    43,    44,    45,    46,    47,    80,    36,    37,
+      38,    39,    40,    41,     0,    42,    43,    44,    45,    46,
+      47,    85,    36,    37,    38,    39,    40,    41,     0,     0,
+       0,    44,    45,    46,    47
 };
 
 static const yytype_int8 yycheck[] =
 {
-      14,     0,    16,    30,    31,    31,     3,     4,     5,    16,
-      17,    18,    19,    20,    21,    29,    30,    31,    31,    33,
-      27,    28,    36,    37,    38,    39,    40,    41,    42,    43,
-      44,    45,    46,    47,    31,    20,    21,    69,    70,    31,
-      31,    55,     3,     4,     5,     6,     7,     8,     9,    10,
-      82,    12,    13,    14,    15,     5,    88,    71,    32,    29,
-      33,    80,    11,    -1,    -1,    -1,    -1,    -1,    -1,    83,
-      31,    -1,    -1,    34,     3,     4,     5,     6,     7,     8,
-       9,    10,    -1,    12,    13,    14,    15,    -1,    16,    17,
+      14,     0,    16,    30,    31,    31,     3,     4,     5,    56,
+       6,     7,     8,     9,    31,    29,    30,    31,    31,    33,
+      20,    21,    36,    37,    38,    39,    40,    41,    42,    43,
+      44,    45,    46,    47,    31,    82,     5,    32,    33,    31,
+      29,    55,     3,     4,     5,     6,     7,     8,     9,    10,
+      34,    12,    13,    14,    15,     5,     5,    71,    11,    -1,
+      -1,    16,    17,    18,    19,    20,    21,    86,    69,    70,
+      31,    85,    27,    28,    35,     3,     4,     5,     6,     7,
+       8,     9,    10,    84,    12,    13,    14,    15,    -1,    -1,
+      -1,    -1,    93,    -1,    -1,    -1,    -1,    16,    17,    18,
+      19,    20,    21,    31,    23,    24,    25,    26,    27,    28,
+      -1,    -1,    -1,    32,    16,    17,    18,    19,    20,    21,
+      -1,    23,    24,    25,    26,    27,    28,    -1,    -1,    -1,
+      32,    16,    17,    18,    19,    20,    21,    -1,    23,    24,
+      25,    26,    27,    28,    -1,    -1,    -1,    32,    16,    17,
       18,    19,    20,    21,    -1,    23,    24,    25,    26,    27,
-      28,    -1,    31,    -1,    32,    16,    17,    18,    19,    20,
+      28,    -1,    -1,    -1,    32,    16,    17,    18,    19,    20,
       21,    -1,    23,    24,    25,    26,    27,    28,    -1,    -1,
       -1,    32,    16,    17,    18,    19,    20,    21,    -1,    23,
-      24,    25,    26,    27,    28,    -1,    -1,    -1,    32,    16,
-      17,    18,    19,    20,    21,    -1,    23,    24,    25,    26,
-      27,    28,    -1,    -1,    -1,    32,    16,    17,    18,    19,
-      20,    21,    -1,    23,    24,    25,    26,    27,    28,    -1,
-      -1,    -1,    32,    16,    17,    18,    19,    20,    21,    -1,
-      23,    24,    25,    26,    27,    28,    29,    16,    17,    18,
-      19,    20,    21,    -1,    23,    24,    25,    26,    27,    28,
-      29,    16,    17,    18,    19,    20,    21,    -1,    23,    24,
-      25,    26,    27,    28,    29,    16,    17,    18,    19,    20,
-      21,    -1,    23,    24,    25,    26,    27,    28,    29,    16,
-      17,    18,    19,    20,    21,    -1,    23,    24,    25,    26,
-      27,    28,    29,    16,    17,    18,    19,    20,    21,    -1,
-      -1,    -1,    25,    26,    27,    28
+      24,    25,    26,    27,    28,    29,    16,    17,    18,    19,
+      20,    21,    -1,    23,    24,    25,    26,    27,    28,    29,
+      16,    17,    18,    19,    20,    21,    -1,    23,    24,    25,
+      26,    27,    28,    29,    16,    17,    18,    19,    20,    21,
+      -1,    23,    24,    25,    26,    27,    28,    29,    16,    17,
+      18,    19,    20,    21,    -1,    23,    24,    25,    26,    27,
+      28,    29,    16,    17,    18,    19,    20,    21,    -1,    -1,
+      -1,    25,    26,    27,    28
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    36,    37,     0,     3,     4,     5,     6,     7,     8,
-       9,    10,    12,    13,    14,    15,    31,    38,    39,    40,
-      41,    42,    43,    45,    46,    47,    48,    49,    50,    31,
-      31,    31,    50,    31,    50,     5,    16,    17,    18,    19,
-      20,    21,    23,    24,    25,    26,    27,    28,    29,    50,
-      50,    50,    29,    50,    32,    30,    31,    50,    50,    50,
-      50,    50,    50,    50,    50,    50,    50,    50,    50,    32,
-      32,    29,    32,    50,    32,    38,    38,    50,    29,    29,
-      33,    44,    11,    29,    37,    38,    50,    34,    32,    38
+       0,    37,    38,     0,     3,     4,     5,     6,     7,     8,
+       9,    10,    12,    13,    14,    15,    31,    39,    40,    41,
+      42,    43,    45,    47,    48,    49,    50,    51,    52,    31,
+      31,    31,    52,    31,    52,     5,    16,    17,    18,    19,
+      20,    21,    23,    24,    25,    26,    27,    28,    29,    52,
+      52,    52,    29,    52,    32,    30,    31,    52,    52,    52,
+      52,    52,    52,    52,    52,    52,    52,    52,    52,    32,
+      32,    29,    32,    52,    44,    45,    39,    39,    52,    29,
+      29,    32,    33,     5,    11,    29,    34,    46,    45,    39,
+      52,    38,     5,    32,    35,    39
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    35,    36,    37,    37,    38,    38,    39,    39,    39,
-      39,    39,    40,    40,    40,    41,    42,    43,    43,    43,
-      43,    44,    45,    45,    46,    47,    48,    49,    50,    50,
-      50,    50,    50,    50,    50,    50,    50,    50,    50,    50,
-      50,    50,    50,    50
+       0,    36,    37,    38,    38,    39,    39,    40,    40,    40,
+      40,    40,    41,    41,    41,    42,    43,    44,    44,    44,
+      45,    45,    45,    45,    46,    47,    47,    48,    49,    50,
+      51,    52,    52,    52,    52,    52,    52,    52,    52,    52,
+      52,    52,    52,    52,    52,    52,    52
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     0,     1,     1,     1,     1,     2,
-       1,     1,     1,     1,     1,     5,     5,     1,     1,     1,
-       1,     3,     5,     7,     5,     9,     3,     5,     3,     3,
-       3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       1,     1,     1,     3
+       1,     1,     1,     1,     1,     5,     6,     4,     2,     0,
+       1,     1,     1,     1,     3,     5,     7,     5,     9,     3,
+       5,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     3,     1,     1,     1,     3
 };
 
 
@@ -1201,258 +1208,316 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: stmt_list  */
-#line 49 "src/parser.y"
+#line 51 "src/parser.y"
               {
+        std::cout << "Building AST for program" << std::endl;
         root = std::unique_ptr<tsompcc::ASTNode>(new tsompcc::BlockNode(std::move(*(yyvsp[0].node_list))));
+        std::cout << "Root set with BlockNode, containing statements: " << (yyvsp[0].node_list)->size() << std::endl;
         delete (yyvsp[0].node_list);
-    }
-#line 1210 "build/parser.cpp"
-    break;
-
-  case 3: /* stmt_list: stmt_list stmt  */
-#line 56 "src/parser.y"
-                   {
-        (yyvsp[-1].node_list)->push_back(tsompcc::ASTNodePtr((yyvsp[0].node)));
-        (yyval.node_list) = (yyvsp[-1].node_list);
     }
 #line 1219 "build/parser.cpp"
     break;
 
-  case 4: /* stmt_list: %empty  */
+  case 3: /* stmt_list: stmt_list stmt  */
 #line 60 "src/parser.y"
+                   {
+        std::cout << "Adding statement to statement list" << std::endl;
+        (yyvsp[-1].node_list)->push_back(tsompcc::ASTNodePtr((yyvsp[0].node)));
+        (yyval.node_list) = (yyvsp[-1].node_list);
+    }
+#line 1229 "build/parser.cpp"
+    break;
+
+  case 4: /* stmt_list: %empty  */
+#line 65 "src/parser.y"
                   {
+        std::cout << "Creating new statement list" << std::endl;
         (yyval.node_list) = new std::vector<tsompcc::ASTNodePtr>();
     }
-#line 1227 "build/parser.cpp"
+#line 1238 "build/parser.cpp"
     break;
 
   case 15: /* var_decl: type IDENTIFIER '=' expr ';'  */
-#line 85 "src/parser.y"
+#line 91 "src/parser.y"
                                  {
+        std::cout << "Variable declaration: " << (yyvsp[-3].id) << std::endl;
         (yyval.node) = new tsompcc::VarDeclNode((yyvsp[-3].id), tsompcc::ASTNodePtr((yyvsp[-1].node)));
     }
-#line 1235 "build/parser.cpp"
+#line 1247 "build/parser.cpp"
     break;
 
-  case 16: /* func_decl: type IDENTIFIER '(' ')' block  */
-#line 91 "src/parser.y"
-                                  {
-        (yyval.node) = new tsompcc::FuncDeclNode((yyvsp[-3].id), std::vector<std::string>(), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1243 "build/parser.cpp"
-    break;
-
-  case 17: /* type: INT  */
-#line 97 "src/parser.y"
-        { (yyval.type_name) = "int"; }
-#line 1249 "build/parser.cpp"
-    break;
-
-  case 18: /* type: FLOAT  */
+  case 16: /* func_decl: type IDENTIFIER '(' param_list ')' block  */
 #line 98 "src/parser.y"
-            { (yyval.type_name) = "float"; }
-#line 1255 "build/parser.cpp"
+                                             {
+        std::cout << "Function declaration: " << (yyvsp[-4].id) << std::endl;
+        (yyval.node) = new tsompcc::FuncDeclNode((yyvsp[-4].id), std::move(*(yyvsp[-2].str_list)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+        delete (yyvsp[-2].str_list);
+    }
+#line 1257 "build/parser.cpp"
     break;
 
-  case 19: /* type: BOOL  */
-#line 99 "src/parser.y"
-           { (yyval.type_name) = "bool"; }
-#line 1261 "build/parser.cpp"
-    break;
-
-  case 20: /* type: VOID  */
-#line 100 "src/parser.y"
-           { (yyval.type_name) = "void"; }
+  case 17: /* param_list: param_list ',' type IDENTIFIER  */
+#line 106 "src/parser.y"
+                                   {
+        std::cout << "Adding parameter to function: " << (yyvsp[0].id) << std::endl;
+        (yyvsp[-3].str_list)->push_back((yyvsp[0].id));
+        (yyval.str_list) = (yyvsp[-3].str_list);
+    }
 #line 1267 "build/parser.cpp"
     break;
 
-  case 21: /* block: '{' stmt_list '}'  */
-#line 104 "src/parser.y"
-                      {
-        (yyval.node) = new tsompcc::BlockNode(std::move(*(yyvsp[-1].node_list)));
-        delete (yyvsp[-1].node_list);
-    }
-#line 1276 "build/parser.cpp"
-    break;
-
-  case 22: /* if_stmt: IF '(' expr ')' stmt  */
+  case 18: /* param_list: type IDENTIFIER  */
 #line 111 "src/parser.y"
-                                               {
-        (yyval.node) = new tsompcc::IfNode(tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+                      {
+        std::cout << "First parameter of function: " << (yyvsp[0].id) << std::endl;
+        (yyval.str_list) = new std::vector<std::string>();
+        (yyval.str_list)->push_back((yyvsp[0].id));
     }
-#line 1284 "build/parser.cpp"
+#line 1277 "build/parser.cpp"
     break;
 
-  case 23: /* if_stmt: IF '(' expr ')' stmt ELSE stmt  */
-#line 114 "src/parser.y"
-                                     {
-        (yyval.node) = new tsompcc::IfElseNode(tsompcc::ASTNodePtr((yyvsp[-4].node)), tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+  case 19: /* param_list: %empty  */
+#line 116 "src/parser.y"
+                  {
+        std::cout << "Function with no parameters" << std::endl;
+        (yyval.str_list) = new std::vector<std::string>();
     }
+#line 1286 "build/parser.cpp"
+    break;
+
+  case 20: /* type: INT  */
+#line 123 "src/parser.y"
+        { (yyval.type_name) = "int"; }
 #line 1292 "build/parser.cpp"
     break;
 
-  case 24: /* while_stmt: WHILE '(' expr ')' stmt  */
-#line 120 "src/parser.y"
+  case 21: /* type: FLOAT  */
+#line 124 "src/parser.y"
+            { (yyval.type_name) = "float"; }
+#line 1298 "build/parser.cpp"
+    break;
+
+  case 22: /* type: BOOL  */
+#line 125 "src/parser.y"
+           { (yyval.type_name) = "bool"; }
+#line 1304 "build/parser.cpp"
+    break;
+
+  case 23: /* type: VOID  */
+#line 126 "src/parser.y"
+           { (yyval.type_name) = "void"; }
+#line 1310 "build/parser.cpp"
+    break;
+
+  case 24: /* block: '{' stmt_list '}'  */
+#line 130 "src/parser.y"
+                      {
+        std::cout << "Block of statements" << std::endl;
+        (yyval.node) = new tsompcc::BlockNode(std::move(*(yyvsp[-1].node_list)));
+        delete (yyvsp[-1].node_list);
+    }
+#line 1320 "build/parser.cpp"
+    break;
+
+  case 25: /* if_stmt: IF '(' expr ')' stmt  */
+#line 138 "src/parser.y"
+                                               {
+        std::cout << "If statement" << std::endl;
+        (yyval.node) = new tsompcc::IfNode(tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1329 "build/parser.cpp"
+    break;
+
+  case 26: /* if_stmt: IF '(' expr ')' stmt ELSE stmt  */
+#line 142 "src/parser.y"
+                                     {
+        std::cout << "If-Else statement" << std::endl;
+        (yyval.node) = new tsompcc::IfElseNode(tsompcc::ASTNodePtr((yyvsp[-4].node)), tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1338 "build/parser.cpp"
+    break;
+
+  case 27: /* while_stmt: WHILE '(' expr ')' stmt  */
+#line 149 "src/parser.y"
                             {
+        std::cout << "While statement" << std::endl;
         (yyval.node) = new tsompcc::WhileNode(tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
     }
-#line 1300 "build/parser.cpp"
+#line 1347 "build/parser.cpp"
     break;
 
-  case 25: /* for_stmt: FOR '(' expr ';' expr ';' expr ')' stmt  */
-#line 126 "src/parser.y"
+  case 28: /* for_stmt: FOR '(' expr ';' expr ';' expr ')' stmt  */
+#line 156 "src/parser.y"
                                             {
+        std::cout << "For statement" << std::endl;
         (yyval.node) = new tsompcc::ForNode(tsompcc::ASTNodePtr((yyvsp[-6].node)), tsompcc::ASTNodePtr((yyvsp[-4].node)), tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1308 "build/parser.cpp"
-    break;
-
-  case 26: /* return_stmt: RETURN expr ';'  */
-#line 132 "src/parser.y"
-                    {
-        (yyval.node) = new tsompcc::ReturnNode(tsompcc::ASTNodePtr((yyvsp[-1].node)));
-    }
-#line 1316 "build/parser.cpp"
-    break;
-
-  case 27: /* print_stmt: PRINT '(' expr ')' ';'  */
-#line 138 "src/parser.y"
-                           {
-        (yyval.node) = new tsompcc::PrintNode(tsompcc::ASTNodePtr((yyvsp[-2].node)));
-    }
-#line 1324 "build/parser.cpp"
-    break;
-
-  case 28: /* expr: expr EQ expr  */
-#line 144 "src/parser.y"
-                 {
-        (yyval.node) = new tsompcc::BinaryOpNode("==", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1332 "build/parser.cpp"
-    break;
-
-  case 29: /* expr: expr NEQ expr  */
-#line 147 "src/parser.y"
-                    {
-        (yyval.node) = new tsompcc::BinaryOpNode("!=", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1340 "build/parser.cpp"
-    break;
-
-  case 30: /* expr: expr LE expr  */
-#line 150 "src/parser.y"
-                   {
-        (yyval.node) = new tsompcc::BinaryOpNode("<=", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1348 "build/parser.cpp"
-    break;
-
-  case 31: /* expr: expr GE expr  */
-#line 153 "src/parser.y"
-                   {
-        (yyval.node) = new tsompcc::BinaryOpNode(">=", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
     }
 #line 1356 "build/parser.cpp"
     break;
 
-  case 32: /* expr: expr '<' expr  */
-#line 156 "src/parser.y"
+  case 29: /* return_stmt: RETURN expr ';'  */
+#line 163 "src/parser.y"
                     {
+        std::cout << "Return statement" << std::endl;
+        (yyval.node) = new tsompcc::ReturnNode(tsompcc::ASTNodePtr((yyvsp[-1].node)));
+    }
+#line 1365 "build/parser.cpp"
+    break;
+
+  case 30: /* print_stmt: PRINT '(' expr ')' ';'  */
+#line 170 "src/parser.y"
+                           {
+        std::cout << "Print statement" << std::endl;
+        (yyval.node) = new tsompcc::PrintNode(tsompcc::ASTNodePtr((yyvsp[-2].node)));
+    }
+#line 1374 "build/parser.cpp"
+    break;
+
+  case 31: /* expr: expr EQ expr  */
+#line 177 "src/parser.y"
+                 {
+        std::cout << "Equality expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("==", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1383 "build/parser.cpp"
+    break;
+
+  case 32: /* expr: expr NEQ expr  */
+#line 181 "src/parser.y"
+                    {
+        std::cout << "Not-equality expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("!=", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1392 "build/parser.cpp"
+    break;
+
+  case 33: /* expr: expr LE expr  */
+#line 185 "src/parser.y"
+                   {
+        std::cout << "Less-or-equal expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("<=", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1401 "build/parser.cpp"
+    break;
+
+  case 34: /* expr: expr GE expr  */
+#line 189 "src/parser.y"
+                   {
+        std::cout << "Greater-or-equal expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode(">=", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1410 "build/parser.cpp"
+    break;
+
+  case 35: /* expr: expr '<' expr  */
+#line 193 "src/parser.y"
+                    {
+        std::cout << "Less-than expression" << std::endl;
         (yyval.node) = new tsompcc::BinaryOpNode("<", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
     }
-#line 1364 "build/parser.cpp"
+#line 1419 "build/parser.cpp"
     break;
 
-  case 33: /* expr: expr '>' expr  */
-#line 159 "src/parser.y"
+  case 36: /* expr: expr '>' expr  */
+#line 197 "src/parser.y"
                     {
+        std::cout << "Greater-than expression" << std::endl;
         (yyval.node) = new tsompcc::BinaryOpNode(">", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1372 "build/parser.cpp"
-    break;
-
-  case 34: /* expr: expr AND expr  */
-#line 162 "src/parser.y"
-                    {
-        (yyval.node) = new tsompcc::BinaryOpNode("&&", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1380 "build/parser.cpp"
-    break;
-
-  case 35: /* expr: expr OR expr  */
-#line 165 "src/parser.y"
-                   {
-        (yyval.node) = new tsompcc::BinaryOpNode("||", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1388 "build/parser.cpp"
-    break;
-
-  case 36: /* expr: expr '+' expr  */
-#line 168 "src/parser.y"
-                    {
-        (yyval.node) = new tsompcc::BinaryOpNode("+", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1396 "build/parser.cpp"
-    break;
-
-  case 37: /* expr: expr '-' expr  */
-#line 171 "src/parser.y"
-                    {
-        (yyval.node) = new tsompcc::BinaryOpNode("-", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1404 "build/parser.cpp"
-    break;
-
-  case 38: /* expr: expr '*' expr  */
-#line 174 "src/parser.y"
-                    {
-        (yyval.node) = new tsompcc::BinaryOpNode("*", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1412 "build/parser.cpp"
-    break;
-
-  case 39: /* expr: expr '/' expr  */
-#line 177 "src/parser.y"
-                    {
-        (yyval.node) = new tsompcc::BinaryOpNode("/", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
-    }
-#line 1420 "build/parser.cpp"
-    break;
-
-  case 40: /* expr: IDENTIFIER  */
-#line 180 "src/parser.y"
-                 {
-        (yyval.node) = new tsompcc::VariableNode((yyvsp[0].id));
     }
 #line 1428 "build/parser.cpp"
     break;
 
-  case 41: /* expr: NUMBER  */
-#line 183 "src/parser.y"
+  case 37: /* expr: expr AND expr  */
+#line 201 "src/parser.y"
+                    {
+        std::cout << "Logical AND expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("&&", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1437 "build/parser.cpp"
+    break;
+
+  case 38: /* expr: expr OR expr  */
+#line 205 "src/parser.y"
+                   {
+        std::cout << "Logical OR expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("||", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1446 "build/parser.cpp"
+    break;
+
+  case 39: /* expr: expr '+' expr  */
+#line 209 "src/parser.y"
+                    {
+        std::cout << "Addition expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("+", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1455 "build/parser.cpp"
+    break;
+
+  case 40: /* expr: expr '-' expr  */
+#line 213 "src/parser.y"
+                    {
+        std::cout << "Subtraction expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("-", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1464 "build/parser.cpp"
+    break;
+
+  case 41: /* expr: expr '*' expr  */
+#line 217 "src/parser.y"
+                    {
+        std::cout << "Multiplication expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("*", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1473 "build/parser.cpp"
+    break;
+
+  case 42: /* expr: expr '/' expr  */
+#line 221 "src/parser.y"
+                    {
+        std::cout << "Division expression" << std::endl;
+        (yyval.node) = new tsompcc::BinaryOpNode("/", tsompcc::ASTNodePtr((yyvsp[-2].node)), tsompcc::ASTNodePtr((yyvsp[0].node)));
+    }
+#line 1482 "build/parser.cpp"
+    break;
+
+  case 43: /* expr: IDENTIFIER  */
+#line 225 "src/parser.y"
+                 {
+        std::cout << "Identifier: " << (yyvsp[0].id) << std::endl;
+        (yyval.node) = new tsompcc::VariableNode((yyvsp[0].id));
+    }
+#line 1491 "build/parser.cpp"
+    break;
+
+  case 44: /* expr: NUMBER  */
+#line 229 "src/parser.y"
              {
+        std::cout << "Number: " << (yyvsp[0].num) << std::endl;
         (yyval.node) = new tsompcc::NumberNode((yyvsp[0].num));
     }
-#line 1436 "build/parser.cpp"
+#line 1500 "build/parser.cpp"
     break;
 
-  case 42: /* expr: FLOATNUMBER  */
-#line 186 "src/parser.y"
+  case 45: /* expr: FLOATNUMBER  */
+#line 233 "src/parser.y"
                   {
+        std::cout << "Float number: " << (yyvsp[0].fnum) << std::endl;
         (yyval.node) = new tsompcc::FloatNode((yyvsp[0].fnum));
     }
-#line 1444 "build/parser.cpp"
+#line 1509 "build/parser.cpp"
     break;
 
-  case 43: /* expr: '(' expr ')'  */
-#line 189 "src/parser.y"
+  case 46: /* expr: '(' expr ')'  */
+#line 237 "src/parser.y"
                    {
         (yyval.node) = (yyvsp[-1].node);
     }
-#line 1452 "build/parser.cpp"
+#line 1517 "build/parser.cpp"
     break;
 
 
-#line 1456 "build/parser.cpp"
+#line 1521 "build/parser.cpp"
 
       default: break;
     }
@@ -1645,10 +1710,9 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 194 "src/parser.y"
+#line 242 "src/parser.y"
 
 
 void yyerror(const char *s) {
     std::cerr << "Error: " << s << std::endl;
 }
-

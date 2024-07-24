@@ -5,15 +5,15 @@
 #include "llvm/IR/Module.h"
 #include "tsompcc/codegen.h"
 #include "tsompcc/parser.h"
-#include "../build/parser.hpp"  
+#include "../build/parser.hpp"
 
 extern FILE *yyin;  // Explicitly declare yyin
-//extern int yyparse();  // Explicitly declare yyparse
 
 llvm::LLVMContext Context;
 llvm::IRBuilder<> Builder(Context);
 std::unique_ptr<llvm::Module> Module = std::make_unique<llvm::Module>("my_module", Context);
 std::unique_ptr<tsompcc::ASTNode> tsompcc::root;
+
 int main(int argc, char **argv) {
     if (argc > 1) {
         FILE *file = fopen(argv[1], "r");
