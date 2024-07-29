@@ -1,63 +1,53 @@
+##tsompCC Compiler
 
-tsompCC-compiler/
-├── docs/
-├── include/
-│   ├── tsompcc/
-│   │   ├── AST.h
-│   │   ├── codegen.h
-│   │   ├── lexer.h
-│   │   ├── parser.h
-│   │   └── utils.h
-├── src/
-│   ├── AST.cpp
-│   ├── codegen.cpp
-│   ├── lexer.l
-│   ├── main.cpp
-│   ├── parser.y
-│   └── utils/
-│       ├── utils.cpp
-├── tests/
-├── examples/
-├── scripts/
-├── build/
-├── CMakeLists.txt
-└── README.md
 
-tsompCC-compiler/
-├── docs/                    # Documentation files
-│   ├── language_spec.md     # Language specification
-│   ├── compiler_design.md   # Compiler design document
-│   └── user_guide.md        # User guide
-├── include/                 # Header files
-│   ├── AST.h                # AST node definitions
-│   ├── lexer.h              # Lexer header
-│   ├── parser.h             # Parser header
-│   ├── codegen.h            # Code generation header
-│   └── ...                  # Other headers
-├── src/                     # Source code
-│   ├── lexer.l              # Flex definitions
-│   ├── parser.y             # Bison grammar rules
-│   ├── AST.cpp              # AST node implementations
-│   ├── codegen.cpp          # Code generation using LLVM
-│   ├── main.cpp             # Main entry point
-│   ├── utils/               # Utility functions
-│   │   ├── utils.cpp
-│   │   └── utils.h
-│   └── ...                  # Other source files
-├── tests/                   # Test files
-│   ├── lexer_tests.cpp
-│   ├── parser_tests.cpp
-│   ├── codegen_tests.cpp
-│   └── ...                  # Other test files
-├── examples/                # Example programs written in tsompCC
-│   ├── example1.tsompcc
-│   ├── example2.tsompcc
-│   └── ...
-├── scripts/                 # Utility scripts (e.g., build, test)
-│   ├── build.sh
-│   └── test.sh
-├── build/                   # Build output directory
-│   ├── ...
-├── CMakeLists.txt           # CMake configuration file (or equivalent)
-└── README.md  
+tsompCC is a compiler designed to parse and generate LLVM Intermediate Representation (IR) for a simple programming language. This project uses Flex for lexical analysis, Bison for parsing, and LLVM for code generation.
+
+#Features
+Lexical Analysis: Tokenizes input source code.
+Parsing: Parses tokens into an Abstract Syntax Tree (AST).
+Code Generation: Generates LLVM IR from the AST.
+Supported Constructs:
+Variable declarations
+Function declarations and calls
+Conditional statements (if-else)
+Loops (while, for)
+Print statements
+Basic arithmetic and logical expressions
+
+
+#Installation
+
+Prerequisites
+LLVM: Install LLVM development tools.
+
+
+
+sudo apt-get install llvm llvm-dev
+Flex: Install Flex for lexical analysis.
+
+
+sudo apt-get install flex
+Bison: Install Bison for parsing.
+
+
+sudo apt-get install bison
+
+##Build Instructions
+#Clone the Repository:
+
+git clone https://github.com/yourusername/tsompcc.git
+cd tsompcc
+
+#Build the Compiler:
+Run the provided build script to compile the project.
+
+./build.sh
+
+#Usage
+Compiling a Source File
+To compile a source file written in the tsompCC language, run:
+
+
+./tsompcc examples/test_program.tcc
 
