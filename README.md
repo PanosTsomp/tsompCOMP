@@ -3,8 +3,6 @@
 
 **tsompCC** is a compiler designed to parse and generate LLVM Intermediate Representation (IR) for a simple programming language. This project uses Flex for lexical analysis, Bison for parsing, and LLVM for code generation.
 
-![TOC Dropdown Screenshot](path/to/table-of-contents-screenshot.png)  
-
 
 ## Table of Contents
 - [Features](#features)
